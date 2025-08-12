@@ -28,6 +28,9 @@ go install github.com/golang-migrate/migrate/v4/cmd/migrate@v4.18.2  # CLI migra
 go get github.com/swaggo/http-swagger/v2@v2.0.2
 # CLI untuk generate docs
 go install github.com/swaggo/swag/cmd/swag@v1.16.6
+# menempatkan hasil generate di server/internal/docs
+# dari folder server/
+swag init -g cmd/api/main.go -o internal/docs
 ```
 
 ### Perintah Migrasi

@@ -1,0 +1,101 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "REST API untuk BlogApp (Go + Next.js)",
+        "title": "BlogApp API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "support@example.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/health": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "Healthcheck",
+                "responses": {
+                    "200": {
+                        "description": "status: ok",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/http.APIResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "http.APIError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "kode error ringkas (mis: VALIDATION_ERROR, NOT_FOUND)",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "detail (bisa array field error, dsb.)"
+                }
+            }
+        },
+        "http.APIResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "description": "payload (opsional)"
+                },
+                "error": {
+                    "description": "error (opsional)",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/http.APIError"
+                        }
+                    ]
+                },
+                "message": {
+                    "description": "pesan singkat",
+                    "type": "string"
+                },
+                "success": {
+                    "description": "true jika sukses",
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

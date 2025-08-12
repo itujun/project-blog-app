@@ -9,6 +9,12 @@ import (
 )
 
 // NewRouter membuat router chi dengan middleware CORS & request logging sederhana
+// GetHealth godoc
+// @Summary  Healthcheck
+// @Tags     System
+// @Produce  json
+// @Success  200 {object} APIResponse{data=map[string]string} "status: ok"
+// @Router   /health [get]
 func NewRouter() *chi.Mux {
 	r := chi.NewRouter()
 

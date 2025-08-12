@@ -1,0 +1,63 @@
+basePath: /api/v1
+definitions:
+  http.APIError:
+    properties:
+      code:
+        description: 'kode error ringkas (mis: VALIDATION_ERROR, NOT_FOUND)'
+        type: string
+      details:
+        description: detail (bisa array field error, dsb.)
+    type: object
+  http.APIResponse:
+    properties:
+      data:
+        description: payload (opsional)
+      error:
+        allOf:
+        - $ref: '#/definitions/http.APIError'
+        description: error (opsional)
+      message:
+        description: pesan singkat
+        type: string
+      success:
+        description: true jika sukses
+        type: boolean
+    type: object
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+  description: REST API untuk BlogApp (Go + Next.js)
+  license:
+    name: MIT
+  termsOfService: http://swagger.io/terms/
+  title: BlogApp API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'status: ok'
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.APIResponse'
+            - properties:
+                data:
+                  additionalProperties:
+                    type: string
+                  type: object
+              type: object
+      summary: Healthcheck
+      tags:
+      - System
+schemes:
+- http
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
