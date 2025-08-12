@@ -1,0 +1,22 @@
+project-blog-app/
+├─ server/                    # Backend Go (Clean Arch)
+│  ├─ cmd/api/main.go
+│  ├─ internal/
+│  │  ├─ config/             # Viper loader
+│  │  ├─ logger/             # Zap singleton
+│  │  ├─ db/                 # koneksi GORM (MySQL/SQLite)
+│  │  ├─ domain/             # entitas (User, Role, Post, ...)
+│  │  ├─ repository/         # interface + implementasi GORM
+│  │  ├─ usecase/            # business logic/service
+│  │  ├─ http/               # handler (chi) + middleware
+│  │  ├─ auth/               # jwt, hash
+│  │  └─ rbac/               # Casbin (model/policy/adapter)
+│  ├─ migrations/            # file .sql golang-migrate
+│  └─ .air.toml              # live reload
+└─ web/                      # Frontend Next.js (App Router)
+   ├─ app/                   # rute
+   ├─ components/
+   ├─ features/              # modular (post, auth, profile)
+   ├─ lib/                   # fetcher, utils
+   ├─ styles/                # tailwind globals
+   └─ shadcn/                # komponen UI ter-generate
