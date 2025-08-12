@@ -22,4 +22,18 @@ go install github.com/air-verse/air@v1.62.0           # air (PATH harus mengarah
 go install github.com/golang-migrate/migrate/v4/cmd/migrate@v4.18.2  # CLI migrasi
 ```
 
+## Install Frontend (Nextjs) pada folder web
+
+```bash
+npm create next-app@latest . -- --ts --tailwind --eslint --app --turbopack
+```
+
 ## Frontend Dependencies
+
+```bash
+# TanStack Query v5 + Devtools
+npm i @tanstack/react-query@5 @tanstack/query-devtools@5
+# shadcn/ui + dark mode helper
+npx shadcn@latest init
+npm i next-themes
+```
