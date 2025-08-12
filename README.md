@@ -22,6 +22,14 @@ go install github.com/air-verse/air@v1.62.0           # air (PATH harus mengarah
 go install github.com/golang-migrate/migrate/v4/cmd/migrate@v4.18.2  # CLI migrasi
 ```
 
+```bash
+# install & wiring swaggo untuk membuat api spec
+# di folder server/
+go get github.com/swaggo/http-swagger/v2@v2.0.2
+# CLI untuk generate docs
+go install github.com/swaggo/swag/cmd/swag@v1.16.6
+```
+
 ### Perintah Migrasi
 
 ```bash
