@@ -8,13 +8,8 @@ import (
 	"github.com/go-chi/cors"
 )
 
-// NewRouter membuat router chi dengan middleware CORS & request logging sederhana
-// GetHealth godoc
-// @Summary  Healthcheck
-// @Tags     System
-// @Produce  json
-// @Success  200 {object} APIResponse{data=map[string]string} "status: ok"
-// @Router   /health [get]
+// NewRouter membuat router chi & memasang rute dasar + versi API.
+// Pola: /api/v1/** dan grup admin di /api/v1/admin/**
 func NewRouter() *chi.Mux {
 	r := chi.NewRouter()
 
@@ -34,15 +29,40 @@ func NewRouter() *chi.Mux {
 			start := time.Now()
 			next.ServeHTTP(w, req)
 			// Di tahap awal, cukup catat method+path+durasi; nanti kita pakai zap untuk struktur log
-			_ = start
+			_ = start // TODO: pasang zap logger untuk catat durasi, status, dsb.
 		})
 	})
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(`{"status":"ok"}`)) // respon sederhana untuk cek konektivitas
+		WriteSuccess(w, http.StatusOK, "ok", map[string]string{"status": "ok"})
+	})
+
+	// ---- API v1 ----
+	r.Route("/api/v1", func(api chi.Router) {
+
+		// Public/semi-public endpoints (contoh)
+		api.Get("/posts", handleListPosts)          // GET /api/v1/posts
+		api.Get("/posts/{id}", HandleGetPost)       // GET /api/v1/posts/:id
+		api.Get("/posts/{id}/comments", HandleListComments)
+
+		// Protected user endpoints (nanti diberi JWT middleware)
+		api.Group(func(g chi.Router) {
+			// TODO: g.Use(AuthMiddleware()) // setelah Fase 3
+			g.Post("/posts", HandleCreatePost)                               // Author/Admin
+			g.Post("/posts/{id}/comments", HandleCreateComment)              // Reader+
+			g.Patch("/users/me", HandleUpdateMe)                             // User login
+		})
+
+		// Admin group: konsisten di /api/v1/admin/**
+		api.Route("/admin", func(ad chi.Router) {
+			// TODO: ad.Use(AuthMiddleware(), RBACMiddleware("admin")) // setelah Fase 3 (Casbin)
+			ad.Post("/posts/{id}/publish", HandlePublishPost)          // Admin/SuperAdmin
+			ad.Post("/categories", HandleCreateCategory)
+			ad.Post("/tags", HandleCreateTag)
+			ad.Get("/users", HandleListUsers)
+		})
 	})
 
 	return r
 }
+// Handler di atas placeholder (belum diisi), tujuannya membentuk pola URL konsisten dulu. Nanti saat Fase 3/4 kita lengkapi dengan JWT + Casbin.
