@@ -1,0 +1,12 @@
+# Konfigurasi air: pantau perubahan file Go & reload binari
+root = "."
+tmp_dir = "tmp"
+
+[build]
+bin = "tmp/app.exe"           # di Windows hasil build .exe
+cmd = "go build -o tmp/app.exe ./cmd/api"
+include_ext = ["go", "yaml"]
+exclude_dir = ["tmp", "vendor"]
+
+[log]
+timestamp = true

@@ -1,0 +1,10 @@
+app:
+  env: development
+  port:
+
+db:
+  driver: mysql/[]
+  dsn: 'root:password@tcp(host:port)/db_name?charset=utf8mb4&parseTime=True&loc=Local'
+
+security:
+  jwt_secret: 'example'
