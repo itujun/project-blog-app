@@ -22,6 +22,21 @@ go install github.com/air-verse/air@v1.62.0           # air (PATH harus mengarah
 go install github.com/golang-migrate/migrate/v4/cmd/migrate@v4.18.2  # CLI migrasi
 ```
 
+### Perintah Migrasi
+
+```bash
+# contoh membuat file migrasi
+$ migrate create -ext sql -dir db/migrations create_table_todos
+
+# contoh menjalankan file migrasi
+$ migrate -database "koneksiDatabase" -path folder up
+          ||
+          || misalnya menjadi kode seperti dibawah ini
+          \/
+$ migrate -database "mysql://user:password@tcp(host:port)/dbname" -path db/migrations up
+$ migrate -database "mysql://user:password@tcp(host:port)/dbname" -path db/migrations down 1
+```
+
 ## Install Frontend (Nextjs) pada folder web
 
 ```bash
