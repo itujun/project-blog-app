@@ -22,6 +22,9 @@ func Load() *viper.Viper {
 	v.SetDefault("app.env", "development")
 	v.SetDefault("db.driver", "mysql")
 	v.SetDefault("security.jwt_secret", "CHANGE_ME_DEV_ONLY") // ganti di prod!
+	v.SetDefault("security.access_ttl_minutes", 15)            // access token 15 menit
+	v.SetDefault("security.refresh_ttl_hours", 720)            // refresh 30 hari (720 jam)
+
 
 	// -- Bind ENV: gunakan prefix BLOGAPP_, contoh: BLOGAPP_PORT
 	v.SetEnvPrefix("BLOGAPP")
