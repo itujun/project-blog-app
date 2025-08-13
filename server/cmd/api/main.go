@@ -11,21 +11,18 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
-// @title			BlogApp API
-// @version 		1.0
-// @description		REST API untuk BlogApp (Go + Next.js)
-// @termsOfService	http://swagger.io/terms/
+// @title       BlogApp API
+// @version     1.0
+// @description REST API untuk BlogApp (Go + Next.js).
+// @description
+// @description **Auth:** gunakan header `Authorization: Bearer <access_token>`
+// @description Contoh: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...`
+// @BasePath   /api/v1
+// @schemes    http
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
 
-// @contact.name	API Support
-// @contact.email	support@example.com
-
-// @license.name	MIT
-
-// @BasePath					/api/v1
-// @schemes						http
-// @securityDefinitions.apikey 	BearerAuth
-// @in 							header
-// @name 						Authorization
 func main() {
 	cfg := config.Load()	// muat konffigurasi (ENV/file)
 	logger.Init()			// inisialisasi zap

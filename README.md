@@ -10,12 +10,13 @@ go get gorm.io/gorm@v1.30.1                           # ORM
 go get gorm.io/driver/mysql@v1.5.7                    # contoh versi terbaru (cek halaman pkg) :contentReference[oaicite:18]{index=18}
 go get github.com/spf13/viper@v1.20.1                 # config
 go get go.uber.org/zap@v1.27.0                        # logging
-go get github.com/golang-jwt/jwt/v5@v5.2.1            # JWT
 go get github.com/go-playground/validator/v10@v10.27.0# validasi
 go get github.com/google/uuid@v1.6.0                  # UUID
-go get github.com/casbin/casbin/v2@v2.113.0           # RBAC Casbin
 go get github.com/glebarez/sqlite@v1.11.0             # opsional: driver SQLite murni Go
 go get github.com/stretchr/testify@v1.10.0            # testing
+go get github.com/golang-jwt/jwt/v5@v5.3.0           # JWT v5
+go get golang.org/x/crypto@v0.41.0                   # bcrypt
+go get github.com/casbin/casbin/v2@v2.113.0          # RBAC
 
 # Tooling (opsional): live reload & migrasi (pakai binary saat run)
 go install github.com/air-verse/air@v1.62.0           # air (PATH harus mengarah ke %USERPROFILE%\go\bin) :contentReference[oaicite:19]{index=19}

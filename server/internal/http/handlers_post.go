@@ -7,10 +7,10 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/yourname/blog-app/server/internal/domain"
-	"github.com/yourname/blog-app/server/internal/repository"
-	"github.com/yourname/blog-app/server/internal/util"
-	"github.com/yourname/blog-app/server/internal/validation"
+	"github.com/itujun/project-blog-app/server/internal/domain"
+	"github.com/itujun/project-blog-app/server/internal/repository"
+	util "github.com/itujun/project-blog-app/server/internal/utils"
+	"github.com/itujun/project-blog-app/server/internal/validation"
 )
 
 // PostCreateRequest adalah payload pembuatan post.
